@@ -4,11 +4,6 @@ import { operadores } from './operadores';
 import { produtos } from './produtos';
 import { etapas, etapaVariacoes } from './etapas';
 
-/**
- * Cartão (ficha) de produção do dia: uma data + produto + etapa (+ variação opcional).
- * A unicidade é garantida por dois índices parciais, porque no SQLite NULL != NULL
- * e um único índice não impediria duas fichas "sem variação" iguais.
- */
 export const producaoFichaDiaria = sqliteTable('producao_ficha_diaria', {
   id:             integer('id').primaryKey({ autoIncrement: true }),
   data:           text('data').notNull(),
@@ -23,7 +18,6 @@ export const producaoFichaDiaria = sqliteTable('producao_ficha_diaria', {
   uniqueIndex('ux_ficha_com_variacao').on(t.data, t.produtoId, t.etapaId, t.variacaoId).where(sql`${t.variacaoId} IS NOT NULL`),
 ]);
 
-/** Operador escalado em uma ficha. */
 export const producaoOperadorDiario = sqliteTable('producao_operador_diario', {
   id:         integer('id').primaryKey({ autoIncrement: true }),
   fichaId:    integer('ficha_id').notNull().references(() => producaoFichaDiaria.id, { onDelete: 'cascade' }),

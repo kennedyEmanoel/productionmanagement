@@ -12,7 +12,6 @@ export const etapas = sqliteTable('etapas', {
   uniqueIndex('ux_etapas_nome').on(sql`lower(${t.nome})`),
 ]);
 
-/** Tipos de uma etapa (ex.: Soldagem → Cabos, Retrabalho; Gravação → Firmware, IMEI, Serial). */
 export const etapaVariacoes = sqliteTable('etapa_variacoes', {
   id:      integer('id').primaryKey({ autoIncrement: true }),
   etapaId: integer('etapa_id').notNull().references(() => etapas.id, { onDelete: 'restrict' }),

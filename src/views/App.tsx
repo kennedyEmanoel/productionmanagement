@@ -5,6 +5,7 @@ import ProducaoDashboard from './pages/Producao/Dashboard';
 import DashboardGeral from './pages/Producao/DashboardGeral';
 import Cadastros from './pages/Cadastros';
 import Analise from './pages/Analise';
+import Guia from './pages/Guia';
 import Header from './components/Header';
 
 const standaloneParam = new URLSearchParams(window.location.search).get('standalone');
@@ -84,6 +85,7 @@ const App = () => {
           {abaAtiva === 'producao-dashboard-geral'   && <DashboardGeral />}
           {abaAtiva === 'cadastros'                  && <Cadastros />}
           {abaAtiva === 'analise'                    && <Analise />}
+          {abaAtiva === 'ajuda'                      && <Guia onIrPara={setAbaAtiva} />}
         </div>
 
       </main>
